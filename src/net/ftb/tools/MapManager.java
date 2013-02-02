@@ -1,5 +1,16 @@
 package net.ftb.tools;
 
+import net.ftb.data.Map;
+import net.ftb.data.Settings;
+import net.ftb.gui.LaunchFrame;
+import net.ftb.gui.dialogs.MapOverwriteDialog;
+import net.ftb.log.Logger;
+import net.ftb.util.DownloadUtils;
+import net.ftb.util.FileUtils;
+import net.ftb.util.OSUtils;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedInputStream;
@@ -9,24 +20,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
-
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingConstants;
-import javax.swing.SwingWorker;
-import javax.swing.border.EmptyBorder;
-
-import net.ftb.data.Map;
-import net.ftb.data.Settings;
-import net.ftb.gui.LaunchFrame;
-import net.ftb.gui.dialogs.MapOverwriteDialog;
-import net.ftb.log.Logger;
-import net.ftb.util.DownloadUtils;
-import net.ftb.util.FileUtils;
-import net.ftb.util.OSUtils;
 
 public class MapManager extends JDialog {
 	private static final long serialVersionUID = 6897832855341265019L;
@@ -87,10 +80,12 @@ public class MapManager extends JDialog {
 
 		protected void downloadMap(String mapName, String dir) throws IOException, NoSuchAlgorithmException {
 			Logger.logInfo("Downloading");
-			String installPath = OSUtils.getDynamicStorageLocation();
+			String installPath = new File(".").getCanonicalPath();
+            Logger.logInfo("Dir: " + dir);
+            Logger.logInfo("Downloading Map to: " + installPath);
 			new File(installPath + "/Maps/" + dir + "/").mkdirs();
 			new File(installPath + "/Maps/" + dir + "/" + mapName).createNewFile();
-			downloadUrl(installPath + "/Maps/" + dir + "/" + mapName, DownloadUtils.getCreeperhostLink("maps%5E" + mapName));
+			downloadUrl(installPath + "/Maps/" + dir + "/" + mapName, DownloadUtils.getCreeperhostLink("maps/" + mapName));
 			FileUtils.extractZipTo(installPath + "/Maps/" + dir + "/" + mapName, installPath + "/Maps/" + dir);
 			installMap(mapName, dir);
 		}
@@ -98,7 +93,9 @@ public class MapManager extends JDialog {
 		protected void installMap(String mapName, String dir) throws IOException {
 			Logger.logInfo("Installing");
 			String installPath = Settings.getSettings().getInstallPath();
-			String tempPath = OSUtils.getDynamicStorageLocation();
+			String tempPath = new File(".").getCanonicalPath();
+            Logger.logInfo("Install Path:" + installPath);
+            Logger.logInfo("Temp Path:" + tempPath);
 			Map map = Map.getMap(LaunchFrame.getSelectedMapIndex());
 			new File(installPath, map.getSelectedCompatible() + "/minecraft/saves/" + dir).mkdirs();
 			FileUtils.copyFolder(new File(tempPath, "Maps/" + dir + "/" + dir), new File(installPath, map.getSelectedCompatible() + "/minecraft/saves/" + dir));

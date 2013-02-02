@@ -1,62 +1,8 @@
 package net.ftb.gui;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.ProgressMonitor;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.WindowConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import net.ftb.data.LoginResponse;
-import net.ftb.data.Map;
-import net.ftb.data.ModPack;
-import net.ftb.data.Settings;
-import net.ftb.data.UserManager;
-import net.ftb.gui.dialogs.InstallDirectoryDialog;
-import net.ftb.gui.dialogs.LauncherUpdateDialog;
-import net.ftb.gui.dialogs.PasswordDialog;
-import net.ftb.gui.dialogs.PlayOfflineDialog;
-import net.ftb.gui.dialogs.ProfileAdderDialog;
-import net.ftb.gui.dialogs.ProfileEditorDialog;
-import net.ftb.gui.panes.ILauncherPane;
-import net.ftb.gui.panes.MapsPane;
-import net.ftb.gui.panes.ModpacksPane;
-import net.ftb.gui.panes.NewsPane;
-import net.ftb.gui.panes.OptionsPane;
-import net.ftb.gui.panes.TexturepackPane;
+import net.ftb.data.*;
+import net.ftb.gui.dialogs.*;
+import net.ftb.gui.panes.*;
 import net.ftb.locale.I18N;
 import net.ftb.locale.I18N.Locale;
 import net.ftb.log.LogEntry;
@@ -64,11 +10,7 @@ import net.ftb.log.LogLevel;
 import net.ftb.log.Logger;
 import net.ftb.log.StreamLogger;
 import net.ftb.mclauncher.MinecraftLauncher;
-import net.ftb.tools.MapManager;
-import net.ftb.tools.MinecraftVersionDetector;
-import net.ftb.tools.ModManager;
-import net.ftb.tools.ProcessMonitor;
-import net.ftb.tools.TextureManager;
+import net.ftb.tools.*;
 import net.ftb.tracking.AnalyticsConfigData;
 import net.ftb.tracking.JGoogleAnalyticsTracker;
 import net.ftb.tracking.JGoogleAnalyticsTracker.DispatchMode;
@@ -80,6 +22,22 @@ import net.ftb.util.FileUtils;
 import net.ftb.util.OSUtils;
 import net.ftb.workers.GameUpdateWorker;
 import net.ftb.workers.LoginWorker;
+
+import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 public class LaunchFrame extends JFrame {
 	private LoginResponse RESPONSE;
@@ -216,11 +174,11 @@ public class LaunchFrame extends JFrame {
 				ModPack.addListener(frame.modPacksPane);
 				ModPack.loadXml(getXmls());
 
-				Map.addListener(frame.mapsPane);
-				Map.loadAll();
+				//Map.addListener(frame.mapsPane);
+				//Map.loadAll();
 
-				//				TexturePack.addListener(frame.tpPane);
-				//				TexturePack.loadAll();
+				TexturePack.addListener(frame.tpPane);
+				TexturePack.loadAll();
 
 				UpdateChecker updateChecker = new UpdateChecker(buildNumber);
 				if(updateChecker.shouldUpdate()){
@@ -237,7 +195,7 @@ public class LaunchFrame extends JFrame {
 	public LaunchFrame(final int tab) {
 		setFont(new Font("a_FuturaOrto", Font.PLAIN, 12));
 		setResizable(false);
-		setTitle("Feed the Beast Launcher v" + version);
+		setTitle("DomainCraft Launcher v" + version);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/logo_ftb.png")));
 
 		panel = new JPanel();
@@ -465,7 +423,7 @@ public class LaunchFrame extends JFrame {
 		tabbedPane.add(modPacksPane, 2);
 		tabbedPane.add(mapsPane, 3);
 		tabbedPane.add(tpPane, 4);
-		tabbedPane.setEnabledAt(4, false);
+		tabbedPane.setEnabledAt(4, true);
 		setTabbedPaneIcons();
 		tabbedPane.setSelectedIndex(tab);
 
@@ -818,7 +776,7 @@ public class LaunchFrame extends JFrame {
 		tabbedPane.setEnabledAt(0, true);
 		tabbedPane.setEnabledAt(1, true);
 		tabbedPane.setEnabledAt(2, true);
-		tabbedPane.setEnabledAt(3, true);
+		tabbedPane.setEnabledAt(3, false);
 		//		tabbedPane.setEnabledAt(4, true);
 		tabbedPane.getSelectedComponent().setEnabled(true);
 		updateFooter();

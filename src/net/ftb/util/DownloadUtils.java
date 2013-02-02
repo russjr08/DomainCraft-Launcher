@@ -1,14 +1,12 @@
 package net.ftb.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import net.ftb.data.Settings;
+import net.ftb.gui.LaunchFrame;
+import net.ftb.log.Logger;
+
+import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -17,10 +15,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import net.ftb.data.Settings;
-import net.ftb.gui.LaunchFrame;
-import net.ftb.log.Logger;
 
 public class DownloadUtils extends Thread {
 	public static boolean serversLoaded = false; 
@@ -39,17 +33,18 @@ public class DownloadUtils extends Thread {
 		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://www.creeperrepo.net";
 		resolved += "/direct/FTB2/" + currentmd5 + "/" + file;
 		HttpURLConnection connection = null;
-		try {
+		/*try {
 			connection = (HttpURLConnection) new URL(resolved).openConnection();
 			for(String server : downloadServers.values()) {
-				if(connection.getResponseCode() != 200 && !server.equalsIgnoreCase("www.creeperrepo.net")) {
-					resolved = "http://" + server + "/direct/FTB2/" + currentmd5 + "/" + file;
+				if(connection.getResponseCode() != 200 && !server.equalsIgnoreCase("launcher.domaincraft.co.uk")) {
+					resolved = "http://" + "launcher.domaincraft.co.uk" + "/direct/DomainCraft/" + currentmd5 + "/" + file;
 					connection = (HttpURLConnection) new URL(resolved).openConnection();
 				}
 			}
-		} catch (IOException e) { }
-		connection.disconnect();
-		Logger.logInfo(resolved);
+		} catch (IOException e) { } */
+        resolved = "http://" + "launcher.domaincraft.co.uk" + "/direct/DomainCraft/" + file;
+
+        Logger.logInfo("Direct: " + resolved);
 		return resolved; 
 	}
 
@@ -61,21 +56,22 @@ public class DownloadUtils extends Thread {
 		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://www.creeperrepo.net";
 		resolved += "/static/FTB2/" + file;
 		HttpURLConnection connection = null;
-		try {
+		/*try {
 			connection = (HttpURLConnection) new URL(resolved).openConnection();
 			if(connection.getResponseCode() != 200) {
 				for(String server : downloadServers.values()) {
 					if(connection.getResponseCode() != 200 && !server.equalsIgnoreCase("www.creeperrepo.net")) {
-						resolved = "http://" + server + "/static/FTB2/" + file;
+						resolved = "http://" + "launcher.domaincraft.co.uk" + "/static/FTB2/" + file;
 						connection = (HttpURLConnection) new URL(resolved).openConnection();
 					} else if(connection.getResponseCode() == 200) {
 						break;
 					}
 				}
 			}
-		} catch (IOException e) { }
-		connection.disconnect();
-		Logger.logInfo(resolved);
+		} catch (IOException e) { } */
+        resolved = "http://" + "launcher.domaincraft.co.uk" + "/static/DomainCraft/" + file;
+		//connection.disconnect();
+		Logger.logInfo("Static: " + resolved);
 		return resolved; 
 	}
 	
@@ -205,10 +201,10 @@ public class DownloadUtils extends Thread {
 				scanner.close();
 			}
 		}
-		String result = fileMD5(file);
-		Logger.logInfo("Local: " + result.toUpperCase());
-		Logger.logInfo("Remote: " + content.toUpperCase());
-		return content.equalsIgnoreCase(result);
+		//String result = fileMD5(file);
+		//Logger.logInfo("Local: " + result.toUpperCase());
+		//Logger.logInfo("Remote: " + content.toUpperCase());
+		return true;
 	}
 
 	/**

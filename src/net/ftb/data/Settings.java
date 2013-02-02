@@ -1,35 +1,25 @@
 package net.ftb.data;
 
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Point;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import net.ftb.gui.LaunchFrame;
+import net.ftb.log.Logger;
+import net.ftb.util.OSUtils;
+
+import java.awt.*;
+import java.io.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
-import net.ftb.gui.LaunchFrame;
-import net.ftb.log.Logger;
-import net.ftb.util.OSUtils;
-
 public class Settings extends Properties {
 	private static Settings settings;
-	private File configFile;
+	public static File configFile;
 	private boolean forceUpdate = false;
 
 	static {
 		try {
-			settings = new Settings(new File(OSUtils.getDynamicStorageLocation(), "ftblaunch.cfg"));
+			settings = new Settings(new File(".", "ftblaunch.cfg"));
 		} catch (IOException e) {
 			Logger.logError("Failed to load settings", e);
 		}
