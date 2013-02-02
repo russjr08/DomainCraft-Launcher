@@ -6,3 +6,12 @@ ftblaunch.cfg
 target/
 *.iml
 .idea/
+/classes/
+/DireWithSprinkles/
+/FTBLauncherLog.txt
+/MinecraftLog.txt
+/res/Maps/
+/res/server.log
+/VoxelBronyPack/
+/res/template/FTB_Launcher.app/Contents/Info.plist
+/res/template/FTB_Launcher.app/Contents/MacOS/FTBLauncher
