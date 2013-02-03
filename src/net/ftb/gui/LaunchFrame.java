@@ -88,7 +88,7 @@ public class LaunchFrame extends JFrame {
 	public static void main(String[] args) {
 		AnalyticsConfigData config = new AnalyticsConfigData("UA-37330489-1");
 		tracker = new JGoogleAnalyticsTracker(config, GoogleAnalyticsVersion.V_4_7_2, DispatchMode.MULTI_THREAD);
-		tracker.setEnabled(true);
+		tracker.setEnabled(false);
 
 		if(!Settings.getSettings().getSnooper()) {
 			tracker.trackPageViewFromReferrer("net/ftb/gui/LaunchFrame.java", "Launcher Start", "Feed The Beast", "http://www.feed-the-beast.com", "/");
@@ -442,7 +442,7 @@ public class LaunchFrame extends JFrame {
 	public void setTabbedPaneIcons() {
 		int i = getUnreadNews();
 		if(i > 0) {
-			tabbedPane.setIconAt(0, new ImageAndTextIcon(this.getClass().getResource("/image/tabs/news_unread_" + Integer.toString(i).length() + ".png"), Integer.toString(i)));
+			//tabbedPane.setIconAt(0, new ImageAndTextIcon(this.getClass().getResource("/image/tabs/news_unread_" + Integer.toString(i).length() + ".png"), Integer.toString(i)));
 		} else {
 			tabbedPane.setIconAt(0, new ImageIcon(this.getClass().getResource("/image/tabs/news.png")));
 		}
