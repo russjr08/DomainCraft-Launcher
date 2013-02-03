@@ -44,8 +44,8 @@ public class LaunchFrame extends JFrame {
 	private NewsPane newsPane;
 	public static JPanel panel;
 	private JPanel footer = new JPanel();
-	private JLabel footerLogo = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_ftb.png")));
-	private JLabel footerCreeper = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_creeperHost.png")));
+	//private JLabel footerLogo = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_ftb.png")));
+	//private JLabel footerCreeper = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_creeperHost.png")));
 	private JLabel tpInstallLocLbl = new JLabel();
 	private JButton launch = new JButton(), edit = new JButton(), donate = new JButton(), serverbutton = new JButton(), mapInstall = new JButton(), serverMap = new JButton(), tpInstall = new JButton();
 
@@ -230,7 +230,7 @@ public class LaunchFrame extends JFrame {
 		});
 
 		//Footer
-		footerLogo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/*footerLogo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		footerLogo.setBounds(20, 20, 42, 42);
 		footerLogo.addMouseListener(new MouseListener() {
 			@Override
@@ -241,9 +241,9 @@ public class LaunchFrame extends JFrame {
 			@Override public void mousePressed(MouseEvent arg0) { }
 			@Override public void mouseExited(MouseEvent arg0) { }
 			@Override public void mouseEntered(MouseEvent arg0) { }
-		});
+		});*/
 
-		footerCreeper.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/*footerCreeper.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		footerCreeper.setBounds(72, 20, 132, 42);
 		footerCreeper.addMouseListener(new MouseListener() {
 			@Override
@@ -254,7 +254,7 @@ public class LaunchFrame extends JFrame {
 			@Override public void mousePressed(MouseEvent arg0) { }
 			@Override public void mouseExited(MouseEvent arg0) { }
 			@Override public void mouseEntered(MouseEvent arg0) { }
-		});
+		});*/
 
 		dropdown_[0] = I18N.getLocaleString("PROFILE_SELECT");
 		dropdown_[1] = I18N.getLocaleString("PROFILE_CREATE");
@@ -398,8 +398,8 @@ public class LaunchFrame extends JFrame {
 
 		footer.add(edit);
 		footer.add(users);
-		footer.add(footerLogo);
-		footer.add(footerCreeper);
+		//footer.add(footerLogo);
+		//footer.add(footerCreeper);
 		footer.add(launch);
 		footer.add(donate);
 		footer.add(serverbutton);
