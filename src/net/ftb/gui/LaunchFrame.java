@@ -44,15 +44,15 @@ public class LaunchFrame extends JFrame {
 	private NewsPane newsPane;
 	public static JPanel panel;
 	private JPanel footer = new JPanel();
-	private JLabel footerLogo = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_ftb.png")));
-	private JLabel footerCreeper = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_creeperHost.png")));
+	//private JLabel footerLogo = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_ftb.png")));
+	//private JLabel footerCreeper = new JLabel(new ImageIcon(this.getClass().getResource("/image/logo_creeperHost.png")));
 	private JLabel tpInstallLocLbl = new JLabel();
 	private JButton launch = new JButton(), edit = new JButton(), donate = new JButton(), serverbutton = new JButton(), mapInstall = new JButton(), serverMap = new JButton(), tpInstall = new JButton();
 
 	private static String[] dropdown_ = {"Select Profile", "Create Profile"};
 	private static JComboBox users, tpInstallLocation, mapInstallLocation;
 	private static LaunchFrame instance = null;
-	private static String version = "1.1.8";
+	private static String version = "1.1.9";
 	private static final long serialVersionUID = 1L;
 
 	public final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);	
@@ -64,7 +64,7 @@ public class LaunchFrame extends JFrame {
 	public TexturepackPane tpPane;
 	public OptionsPane optionsPane;
 
-	public static int buildNumber = 118;
+	public static int buildNumber = 119;
 	public static boolean noConfig = false;
 	public static LauncherConsole con;
 	public static String tempPass = "";
@@ -88,7 +88,7 @@ public class LaunchFrame extends JFrame {
 	public static void main(String[] args) {
 		AnalyticsConfigData config = new AnalyticsConfigData("UA-37330489-1");
 		tracker = new JGoogleAnalyticsTracker(config, GoogleAnalyticsVersion.V_4_7_2, DispatchMode.MULTI_THREAD);
-		tracker.setEnabled(true);
+		tracker.setEnabled(false);
 
 		if(!Settings.getSettings().getSnooper()) {
 			tracker.trackPageViewFromReferrer("net/ftb/gui/LaunchFrame.java", "Launcher Start", "Feed The Beast", "http://www.feed-the-beast.com", "/");
@@ -230,7 +230,7 @@ public class LaunchFrame extends JFrame {
 		});
 
 		//Footer
-		footerLogo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/*footerLogo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		footerLogo.setBounds(20, 20, 42, 42);
 		footerLogo.addMouseListener(new MouseListener() {
 			@Override
@@ -241,9 +241,9 @@ public class LaunchFrame extends JFrame {
 			@Override public void mousePressed(MouseEvent arg0) { }
 			@Override public void mouseExited(MouseEvent arg0) { }
 			@Override public void mouseEntered(MouseEvent arg0) { }
-		});
+		});*/
 
-		footerCreeper.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/*footerCreeper.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		footerCreeper.setBounds(72, 20, 132, 42);
 		footerCreeper.addMouseListener(new MouseListener() {
 			@Override
@@ -254,7 +254,7 @@ public class LaunchFrame extends JFrame {
 			@Override public void mousePressed(MouseEvent arg0) { }
 			@Override public void mouseExited(MouseEvent arg0) { }
 			@Override public void mouseEntered(MouseEvent arg0) { }
-		});
+		});*/
 
 		dropdown_[0] = I18N.getLocaleString("PROFILE_SELECT");
 		dropdown_[1] = I18N.getLocaleString("PROFILE_CREATE");
@@ -398,8 +398,8 @@ public class LaunchFrame extends JFrame {
 
 		footer.add(edit);
 		footer.add(users);
-		footer.add(footerLogo);
-		footer.add(footerCreeper);
+		//footer.add(footerLogo);
+		//footer.add(footerCreeper);
 		footer.add(launch);
 		footer.add(donate);
 		footer.add(serverbutton);
@@ -424,6 +424,7 @@ public class LaunchFrame extends JFrame {
 		tabbedPane.add(mapsPane, 3);
 		tabbedPane.add(tpPane, 4);
 		tabbedPane.setEnabledAt(4, true);
+        tabbedPane.setEnabledAt(3, false);
 		setTabbedPaneIcons();
 		tabbedPane.setSelectedIndex(tab);
 
@@ -442,7 +443,7 @@ public class LaunchFrame extends JFrame {
 	public void setTabbedPaneIcons() {
 		int i = getUnreadNews();
 		if(i > 0) {
-			tabbedPane.setIconAt(0, new ImageAndTextIcon(this.getClass().getResource("/image/tabs/news_unread_" + Integer.toString(i).length() + ".png"), Integer.toString(i)));
+			//tabbedPane.setIconAt(0, new ImageAndTextIcon(this.getClass().getResource("/image/tabs/news_unread_" + Integer.toString(i).length() + ".png"), Integer.toString(i)));
 		} else {
 			tabbedPane.setIconAt(0, new ImageIcon(this.getClass().getResource("/image/tabs/news.png")));
 		}
