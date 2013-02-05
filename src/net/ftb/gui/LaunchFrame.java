@@ -424,6 +424,7 @@ public class LaunchFrame extends JFrame {
 		tabbedPane.add(mapsPane, 3);
 		tabbedPane.add(tpPane, 4);
 		tabbedPane.setEnabledAt(4, true);
+        tabbedPane.setEnabledAt(3, false);
 		setTabbedPaneIcons();
 		tabbedPane.setSelectedIndex(tab);
 
