@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.ftb</groupId>
-  <artifactId>FTB_Launcher</artifactId>
+  <artifactId>DomainCraft_Launcher</artifactId>
   <version>1.1.9</version>
   <packaging>jar</packaging>
   <properties>
@@ -13,8 +13,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <name>FTB Launcher</name>
-  <url>https://github.com/Slowpoke101/FTBLaunch</url>
+  <name>DomainCraft Launcher</name>
+  <url>https://github.com/russjr08/DomainCraft-Launcher</url>
 
   <build>
     <defaultGoal>clean install package</defaultGoal>
@@ -105,7 +105,7 @@
             <phase>package</phase>
             <configuration>
               <target>
-                <copy todir="${project.build.directory}/${project.artifactId}.app">
+                <!-- <copy todir="${project.build.directory}/${project.artifactId}.app">
                   <fileset dir="res/template/FTB_Launcher.app" />
                 </copy>
                 <copy file="${project.build.directory}/${project.artifactId}-${project.version}.jar" tofile="${project.build.directory}/${project.artifactId}.app/Contents/Resources/FTB_Launcher.jar" />
@@ -118,7 +118,7 @@
 		  <zipfileset dir="${project.build.directory}/${project.artifactId}.app/Contents/Resources" prefix="${project.artifactId}.app/Contents/Resources/" />
 		  <zipfileset dir="${project.build.directory}/${project.artifactId}.app/Contents/" includes="Info.plist" fullpath="${project.artifactId}.app/Contents/Info.plist" />
                 </zip>
-		<delete dir="${project.build.directory}/${project.artifactId}.app" />
+		<delete dir="${project.build.directory}/${project.artifactId}.app" /> -->
               </target>
             </configuration>
             <goals>
